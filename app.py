@@ -22,9 +22,12 @@ def is_image(URL):
 	print returnValue
 	return returnValue
 
+@app.route('/nsfw/api/v1.0/', methods=['GET'])
+def index():
+	return 'Welcome to Unofficial API for open-nsfw by Yahoo'
 
 @app.route('/nsfw/api/v1.0/rating', methods=['GET'])
-def index():
+def get_rating():
 	URL = request.args.get('url')
 	if not URL:
 		abort(400)
