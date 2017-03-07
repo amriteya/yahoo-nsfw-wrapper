@@ -25,7 +25,9 @@ def is_image(URL):
 
 @app.route('/nsfw/api/v1.0/rating', methods=['GET'])
 def index():
-	URL = request.headers.get('url')
+	URL = request.args.get('url')
+	if not URL:
+		abort(400)
 	hash_code = '%08x' % random.getrandbits(32)
 	print hash_code
 	print URL
