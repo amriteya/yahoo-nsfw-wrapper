@@ -38,10 +38,10 @@ def get_rating():
 		abort(400)
 	print 'Hello'
 	try:
-		urllib.urlretrieve(URL, "images/_%s.jpg" % hash_code)
+		urllib.urlretrieve(URL, "open_nsfw/images/_%s.jpg" % hash_code)
 	except IOError:
 		abort(400)
-	command = 'docker run --rm --volume=$(pwd):/workspace caffe:cpu python ./classify_nsfw.py --model_def nsfw_model/deploy.prototxt --pretrained_model nsfw_model/resnet_50_1by2_nsfw.caffemodel images/_%s.jpg' % hash_code
+	command = 'cd open_nsfw; docker run --rm --volume=$(pwd):/workspace caffe:cpu python ./classify_nsfw.py --model_def nsfw_model/deploy.prototxt --pretrained_model nsfw_model/resnet_50_1by2_nsfw.caffemodel images/_%s.jpg' % hash_code
 	print command
 	return execute_command(command)
 
